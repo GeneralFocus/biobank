@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="regDetails"
+            type="com.capriquota.bloodbank.viewmodel.RegistrationData" />
+    </data>
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/nestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:backgroundTintMode="multiply"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    tools:context=".views.register.RegistrationActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:paddingTop="30dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:src="@drawable/blood2"
+            android:tint="@color/textRed"
+            android:contentDescription="@string/image_description"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_enter_your_email"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:id="@+id/regName"
+            android:layout_marginTop="20dp"
+            android:textColorHint="@color/textColorHint"
+            android:text="@={regDetails.name}"
+            android:textColor="@color/textRed"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_enter_your_username"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:layout_marginTop="10dp"
+            android:id="@+id/regUserName"
+            android:text="@={regDetails.username}"
+            android:textColorHint="@color/textColorHint"
+            android:textColor="@color/textRed"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_enter_your_password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:id="@+id/regPassword"
+            android:text="@={regDetails.password}"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/textColorHint"
+            android:textColor="@color/textRed"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/regConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_confirm_your_password"
+            android:inputType="textPassword"
+            android:text="@={regDetails.rpassword}"
+            android:maxLines="1"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/textColorHint"
+            android:textColor="@color/textRed"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:textColor="#Fff"
+            android:background="@drawable/rounded_button_filled"
+            android:text="@string/reg" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/account_yes"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="@string/hint_already_a_member_login"
+            android:textSize="@dimen/textSize_16"
+            android:textColor="@color/textRed"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.core.widget.NestedScrollView>
+</layout>

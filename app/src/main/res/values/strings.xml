@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Bio Bank</string>
+    <string name="hint_enter_your_email">Enter Your Name</string>
+    <string name="reg">Register</string>
+    <string name="hint_already_a_member_login">Already have an account? Login here</string>
+    <string name="hint_enter_your_username">Enter your username</string>
+    <string name="hint_enter_your_password">Enter your password</string>
+    <string name="hint_confirm_your_password">Confirm password</string>
+    <string name="image_description">Image Description</string>
+    <string name="login">Login</string>
+    <string name="no_account_yet_register_now">No account yet? Register now</string>
+    <string name="login_user_name">User Name</string>
+    <string name="user_gmail_com">user@gmail.com</string>
+    <string name="phone_number">xxxx xxx xxxx</string>
+    <string name="donation_count">12</string>
+    <string name="view_all_apointments">View all apointments</string>
+    <string name="blood_group">Blood Group</string>
+    <string name="blood_group_value">A+</string>
+    <string name="appointments">Appointments</string>
+    <string name="settings">Settings</string>
+    <string name="book_appointment">Booking</string>
+    <string name="organ_name">Bio Name</string>
+    <string name="book_appointment_now">Book Appointment</string>
+    <string name="date_placeholder">--/--/----</string>
+    <string name="preferred_date">Preferred Date</string>
+    <string name="make_a_new_reservation_for_sample_donation">Make a new reservation for sample donation</string>
+    <string name="view_sample_donation_list">View sample donation list</string>
+    <string name="customise_your_application_here">Customise your application here</string>
+    <string name="give_a_description">Give a description</string>
+    <string name="book_an_appointment">Book an Appointment</string>
+    <string name="refresh">Refresh</string>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_appoint"
+        android:icon="@drawable/appointment_list"
+        android:title="@string/appointments"/>
+
+    <item
+        android:id="@+id/navigation_new_appoint"
+        android:icon="@drawable/appointment"
+        android:title="@string/book_appointment"/>
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/settings"
+        android:title="@string/settings"/>
+
+</menu>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.splash.SplashActivity"
+        android:backgroundTintMode="multiply"
+        android:backgroundTint="@color/overLay">
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:id="@+id/logo"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/blood2"
+            android:tint="@color/textRed"
+            android:contentDescription="@string/image_description"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/app_name"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/logo"
+            android:textAlignment="center"
+            android:textColor="@color/textRed"
+            android:textSize="@dimen/textSize32"
+            android:textStyle="bold"
+
+            />
+
+    </RelativeLayout>
+</layout>

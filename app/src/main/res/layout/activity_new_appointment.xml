@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="newAppointment"
+            type="com.capriquota.bloodbank.viewmodel.newAppointmentData.NewAppointmentData"/>
+    </data>
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:backgroundTintMode="multiply"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        tools:context=".views.frags.NewAppointment">
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:paddingTop="30dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_an_appointment"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="32sp"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/organ_name"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:id="@+id/donate_organ"
+                android:text="@={newAppointment.donateOrgan}"
+                android:layout_marginTop="20dp"
+                android:textColorHint="@color/textColorHint"
+                android:textColor="@color/textRed"/>
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/preferred_date"
+                android:maxLines="1"
+                android:id="@+id/donate_date"
+                android:text="@={newAppointment.donateDate}"
+                android:layout_marginTop="20dp"
+                android:textColorHint="@color/textColorHint"
+                android:textColor="@color/textRed"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/give_a_description"
+                android:inputType="textMultiLine"
+                android:maxLines="6"
+                android:id="@+id/donate_text"
+                android:text="@={newAppointment.donateText}"
+                android:layout_marginTop="20dp"
+                android:textColorHint="@color/textColorHint"
+                android:textColor="@color/textRed"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/donate_now"
+                android:layout_width="250dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:textColor="#Fff"
+                android:background="@drawable/rounded_button_filled"
+                android:text="@string/book_appointment_now" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+</layout>
