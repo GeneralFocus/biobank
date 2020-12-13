@@ -29,4 +29,6 @@
     <string name="give_a_description">Give a description</string>
     <string name="book_an_appointment">Book an Appointment</string>
     <string name="refresh">Refresh</string>
+    <string name="those_that_need_your_donation">Those that need your donation</string>
+    <string name="request">Your Request</string>
 </resources>

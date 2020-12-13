@@ -1,78 +1,114 @@
 package com.capriquota.bloodbank.views.controls;
 
+import android.app.ProgressDialog
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.capriquota.bloodbank.R
-import android.util.Log
 import android.widget.ListView
-import com.capriquota.bloodbank.model.AppointmentModel
 import com.capriquota.bloodbank.model.CustomAdapter
-import org.json.JSONException
 import org.json.JSONObject
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.android.extension.responseJson
-import java.util.ArrayList
+import android.view.View
+import android.widget.ProgressBar
+import com.capriquota.bloodbank.model.Model
+import okhttp3.*
+import org.json.JSONArray
+import java.io.IOException
+import kotlin.collections.ArrayList
 
 class AppointmentList: AppCompatActivity() {
-        internal var URL = "http://apps.capriquota.com/biobank/all_booking.php"
-        private val jsoncode = 1
-        private var listView: ListView? = null
-        private var playersModelArrayList: ArrayList<AppointmentModel>? = null
-        private var customeAdapter: CustomAdapter? = null
 
+        internal var URL = "http://capriquota.com/api/biobank/all_booking.php"
+        private var mProgressDialog: ProgressDialog? = null
+        lateinit var listView_details: ListView
+        var arrayList_details:ArrayList<Model> = ArrayList();
+        //OkHttpClient creates connection pool between client and server
+        val client = OkHttpClient()
         override fun onCreate(savedInstanceState: Bundle?) {
                 super.onCreate(savedInstanceState)
                 setContentView(R.layout.activity_apointment_list)
-                listView = findViewById(R.id.lv) as ListView
-                sampleKo()
+              // progress = findViewById(R.id.progressBar)
+               // progress.visibility = View.VISIBLE
+                listView_details = findViewById(R.id.listView)
+                run("http://capriquota.com/api/biobank/all_booking.php")
         }
 
-        private fun sampleKo() {
-                try {
+        fun run(url: String) {
+               // showSimpleProgressDialog(this, null, "Loading...", false)
+                //progress.visibility = View.VISIBLE
+                val request = Request.Builder()
+                        .url(url)
+                        .build()
 
-                        Fuel.post(URL, listOf()).responseJson { request, response, result ->
-                                Log.d("plzzzzz", result.get().content)
-                                onTaskCompleted(result.get().content)
+                client.newCall(request).enqueue(object : Callback {
+                        override fun onFailure(call: Call, e: IOException) {
+                               // progress.visibility = View.GONE
+                            //    removeSimpleProgressDialog()
                         }
-                } catch (e: Exception) {
 
-                } finally {
-
-                }
-        }
-
-
-        fun onTaskCompleted(response: String) {
-                Log.d("responsejson", response)
-
-                playersModelArrayList = getInfo(response)
-                customeAdapter = CustomAdapter(this, playersModelArrayList!!)
-                listView!!.adapter = customeAdapter
-        }
-
-        fun getInfo(response: String): ArrayList<AppointmentModel> {
-                val playersModelArrayList = ArrayList<AppointmentModel>()
-                try {
-                        val jsonObject = JSONObject(response)
-                        if (jsonObject.getString("id") >= "1") {
-
-                             //   val dataArray = jsonObject.getJSONArray("data")
-
-                                for (i in 0 until jsonObject.length()) {
-                                        val playersModel = AppointmentModel()
-                                       // val dataobj = dataArray.getJSONObject(i)
-                                        playersModel.setNames(jsonObject.getString("bio_organ"))
-                                        playersModel.setCountrys(jsonObject.getString("bio_note"))
-                                        playersModel.setCitys(jsonObject.getString("date"))
-                                        playersModelArrayList.add(playersModel)
+                        override fun onResponse(call: Call, response: Response) {
+                                var str_response = response.body()!!.string()
+                                //creating json object
+                                val json_contact:JSONObject = JSONObject(str_response)
+                                //creating json array
+                                var jsonarray_info:JSONArray= json_contact.getJSONArray("info")
+                                var i:Int = 0
+                                var size:Int = jsonarray_info.length()
+                                arrayList_details= ArrayList();
+                                for (i in 0.. size-1) {
+                                          var json_objectdetail:JSONObject=jsonarray_info.getJSONObject(i)
+                                        var model:Model= Model();
+                                        model.id=json_objectdetail.getString("bio_organ")
+                                        model.name=json_objectdetail.getString("bio_name")
+                                        model.email=json_objectdetail.getString("date")
+                                        arrayList_details.add(model)
                                 }
-                        }
 
-                } catch (e: JSONException) {
+                                runOnUiThread {
+                                        //stuff that updates ui
+                                        val obj_adapter : CustomAdapter
+                                        obj_adapter = CustomAdapter(applicationContext,arrayList_details)
+                                        listView_details.adapter=obj_adapter
+                                }
+                                        //    removeSimpleProgressDialog()
+                               // progress.visibility = View.GONE
+                        }
+                })
+        }
+
+        private fun showSimpleProgressDialog(context: Context, title: String?, msg: String, isCancelable: Boolean) {
+                try {
+                        if (mProgressDialog == null) {
+                                mProgressDialog = ProgressDialog.show(context, title, msg)
+                                mProgressDialog!!.setCancelable(isCancelable)
+                        }
+                        if (!mProgressDialog!!.isShowing) {
+                                mProgressDialog!!.show()
+                        }
+                } catch (ie: IllegalArgumentException) {
+                        ie.printStackTrace()
+                } catch (re: RuntimeException) {
+                        re.printStackTrace()
+                } catch (e: Exception) {
                         e.printStackTrace()
                 }
-
-                return playersModelArrayList
         }
 
+        private fun removeSimpleProgressDialog() {
+                try {
+                        if (mProgressDialog != null) {
+                                if (mProgressDialog!!.isShowing) {
+                                        mProgressDialog!!.dismiss()
+                                        mProgressDialog = null
+                                }
+                        }
+                } catch (ie: IllegalArgumentException) {
+                        ie.printStackTrace()
+
+                } catch (re: RuntimeException) {
+                        re.printStackTrace()
+                } catch (e: Exception) {
+                        e.printStackTrace()
+                }
+        }
 }

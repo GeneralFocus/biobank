@@ -81,13 +81,6 @@ class RegistrationActivity : AppCompatActivity() {
                     removeSimpleProgressDialog()
                     Toast.makeText(this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show()
                 }
-
-
-               /* removeSimpleProgressDialog()
-                Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT).show()
-                val intent = Intent(applicationContext, LoginActivity::class.java)
-                startActivity(intent)
-                finish() */
             }
         } catch (e: Exception) {
             Log.d("Fuel Error ",e.message.toString())

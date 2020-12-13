@@ -26,11 +26,8 @@ import com.google.android.material.snackbar.Snackbar
         // val intent  = getIntent()
 
         binding.cardAppointment.setOnClickListener {
-           // Toast.makeText(this,username,Toast.LENGTH_LONG).show()
             val intent = Intent(this, NewAppointment::class.java)
-           // intent.putExtra("username", intent.getStringExtra("username"))
             intent.putExtra("username", value)
-         //   Toast.makeText(this,"variable value $value ",Toast.LENGTH_LONG).show()
             startActivity(intent)
         }
 
@@ -41,8 +38,15 @@ import com.google.android.material.snackbar.Snackbar
         }
 
         binding.cardList.setOnClickListener {
-            val intent = Intent(applicationContext, AppointmentList::class.java)
+            val intent = Intent(this, AppointmentList::class.java)
+            intent.putExtra("username", value)
             startActivity(intent)
+        }
+
+        binding.cardRequest.setOnClickListener {
+            Snackbar.make(it,"No Request yet...", Snackbar.LENGTH_LONG).show()
+            //   val intent = Intent(applicationContext, SettingsActivity::class.java)
+            // startActivity(intent)
         }
 
     }

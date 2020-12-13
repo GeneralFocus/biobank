@@ -5,65 +5,62 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import java.util.*
 import com.capriquota.bloodbank.R
-import java.util.ArrayList
 
-class CustomAdapter(private val context: Context, private val playersModelArrayList: ArrayList<AppointmentModel>) :
-        BaseAdapter() {
+import android.widget.LinearLayout
 
-    override fun getViewTypeCount(): Int {
-        return count
-    }
+class CustomAdapter(context: Context,arrayListDetails:ArrayList<Model>) : BaseAdapter(){
 
-    override fun getItemViewType(position: Int): Int {
+    private val layoutInflater: LayoutInflater
+    private val arrayListDetails:ArrayList<Model>
 
-        return position
+    init {
+        this.layoutInflater = LayoutInflater.from(context)
+        this.arrayListDetails=arrayListDetails
     }
 
     override fun getCount(): Int {
-        return playersModelArrayList.size
+        return arrayListDetails.size
     }
 
     override fun getItem(position: Int): Any {
-        return playersModelArrayList[position]
+        return arrayListDetails.get(position)
     }
 
     override fun getItemId(position: Int): Long {
-        return 0
+        return position.toLong()
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var convertView = convertView
-        val holder: ViewHolder
-
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
+        val view: View?
+        val listRowHolder: ListRowHolder
         if (convertView == null) {
-            holder = ViewHolder()
-            val inflater = context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = inflater.inflate(R.layout.row_item, null, true)
-
-            holder.tvname = convertView!!.findViewById(R.id.name) as TextView
-            holder.tvcountry = convertView.findViewById(R.id.country) as TextView
-            holder.tvcity = convertView.findViewById(R.id.city) as TextView
-
-            convertView.tag = holder
+            view = this.layoutInflater.inflate(R.layout.row_item, parent, false)
+            listRowHolder = ListRowHolder(view)
+            view.tag = listRowHolder
         } else {
-            // the getTag returns the viewHolder object set as a tag to the view
-            holder = convertView.tag as ViewHolder
+            view = convertView
+            listRowHolder = view.tag as ListRowHolder
         }
 
-        holder.tvname!!.text = "Name: " + playersModelArrayList[position].getNames()
-        holder.tvcountry!!.text = "Country: " + playersModelArrayList[position].getCountrys()
-        holder.tvcity!!.text = "City: " + playersModelArrayList[position].getCitys()
-
-        return convertView
+        listRowHolder.tvName.text = arrayListDetails.get(position).name
+        listRowHolder.tvEmail.text = arrayListDetails.get(position).email
+        listRowHolder.tvId.text = arrayListDetails.get(position).id
+        return view
     }
+}
 
-    private inner class ViewHolder {
+private class ListRowHolder(row: View?) {
+    public val tvName: TextView
+    public val tvEmail: TextView
+    public val tvId: TextView
+    public val linearLayout: LinearLayout
 
-        var tvname: TextView? = null
-        var tvcountry: TextView? = null
-        var tvcity: TextView? = null
+    init {
+        this.tvId = row?.findViewById<TextView>(R.id.tvId) as TextView
+        this.tvName = row?.findViewById<TextView>(R.id.tvName) as TextView
+        this.tvEmail = row?.findViewById<TextView>(R.id.tvEmail) as TextView
+        this.linearLayout = row?.findViewById<LinearLayout>(R.id.linearLayout) as LinearLayout
     }
-
 }

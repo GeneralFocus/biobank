@@ -49,7 +49,7 @@ class NewAppointment: AppCompatActivity() {
             if(newAppointment.donateText.isEmpty()){
                 binding.donateText.error="Please write a short note..."
             }
-            register(value)
+            donate(value)
         }
 
         binding.donateDate.setText(SimpleDateFormat("dd/MM/yyyy").format(System.currentTimeMillis()))
@@ -77,7 +77,7 @@ class NewAppointment: AppCompatActivity() {
     }
 
     @Throws(IOException::class, JSONException::class)
-    private fun register(username: String?){
+    private fun donate(username: String?){
 
         showSimpleProgressDialog(this, null, "Loading...", false)
         try {
@@ -93,8 +93,13 @@ class NewAppointment: AppCompatActivity() {
                 if (jsonObject.getString("status") == "true") {
                     removeSimpleProgressDialog()
                     Toast.makeText(this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show()
-                 //   val intent = Intent(applicationContext, AppointmentList::class.java)
-                   // startActivity(intent)
+
+                    val intent = Intent(this, AppointmentList::class.java)
+                    intent.putExtra("username", username)
+                    startActivity(intent)
+
+                   /*val intent = Intent(applicationContext, AppointmentList::class.java)
+                   startActivity(intent)*/
                   //  finish()
                 }else{
                     removeSimpleProgressDialog()
