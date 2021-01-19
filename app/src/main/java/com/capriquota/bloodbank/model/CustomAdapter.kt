@@ -10,9 +10,9 @@ import com.capriquota.bloodbank.R
 
 import android.widget.LinearLayout
 
-class CustomAdapter(context: Context,arrayListDetails:ArrayList<Model>) : BaseAdapter(){
+/* class CustomAdapter(context: Context,arrayListDetails:ArrayList<Model>) : BaseAdapter(){
 
-    private val layoutInflater: LayoutInflater
+   /* private val layoutInflater: LayoutInflater
     private val arrayListDetails:ArrayList<Model>
 
     init {
@@ -58,9 +58,9 @@ private class ListRowHolder(row: View?) {
     public val linearLayout: LinearLayout
 
     init {
-        this.tvId = row?.findViewById<TextView>(R.id.tvId) as TextView
+        /* this.tvId = row?.findViewById<TextView>(R.id.tvId) as TextView
         this.tvName = row?.findViewById<TextView>(R.id.tvName) as TextView
         this.tvEmail = row?.findViewById<TextView>(R.id.tvEmail) as TextView
         this.linearLayout = row?.findViewById<LinearLayout>(R.id.linearLayout) as LinearLayout
     }
-}
+} */
